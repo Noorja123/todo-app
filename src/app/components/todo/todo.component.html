@@ -1,0 +1,77 @@
+<div class="todo-container">
+  <div class="icons">
+   <app-todo></app-todo>
+<h2>Todo List</h2>
+<div class="flex-stretch"></div>
+
+  <!-- changes 2 -->
+  <h1>Task Viewer</h1>
+  <br>
+
+  <div class="view-toggle-container">
+    <button id="list-btn" (click)="listView()">
+      <!-- {{ isBoardView ? 'List View' : 'Board View' }} -->
+        List View
+    </button>
+    <button id="board-btn" (click)="boardview()">
+      <!-- {{ isBoardView ? 'Board View' : 'List View' }} -->
+        Board View
+    </button>
+  </div>
+
+
+<br>
+<br>
+<br>
+   <div *ngIf="!isBoardView" class="default-view">
+    <input [(ngModel)]="newTodo" placeholder="Add new task" />
+    <button (click)="addTodo()">Add</button>
+    <br>
+    <br>
+  <!-- <ul>  
+  <li *ngFor="let todo of todos$ | async">
+  <input type="checkbox" [checked]="todo.status==='Completed'" (change)="toggleTodo(todo.id)" />
+  <span [class.completed]="todo.completed">{{ todo.title }}</span>
+  <button (click)="deleteTodo(todo.id)">Delete</button>
+  </li>
+  </ul> -->
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let todo">
+        <mat-checkbox
+          class="custom-checkbox"
+          [checked]="todo.status === 'Completed'"
+          (change)="toggleTodo(todo.id)"
+        ></mat-checkbox>
+      </td>
+    </ng-container>
+    
+  
+    <!-- Task Title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Task </th>
+      <td mat-cell *matCellDef="let todo">{{ todo.title }}</td>
+    </ng-container>
+  
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let todo">
+        <button class="btn-icon" mat-button color="warn" (click)="renameTask(todo.id)"><mat-icon>edit</mat-icon></button>
+        <button class="btn-icon" mat-button color="warn" (click)="deleteTodo(todo.id)"><mat-icon>delete</mat-icon></button>
+        
+      </td>
+    </ng-container>
+  
+    <!-- Header & Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  </table>
+  </div>
+  </div> 
+  <app-todo-board *ngIf="isBoardView"></app-todo-board>
+
+</div>
