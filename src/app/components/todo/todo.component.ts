@@ -12,18 +12,18 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
-  selector: 'app-todo',
-  standalone: true,  //  Ensure it's a standalone component
-  imports: [FormsModule,
-     CommonModule, 
-     TodoBoardComponent, 
-     MatCheckboxModule,
-     MatCardModule, 
-     MatTableModule,
-     MatRadioModule,
-     MatIconModule],  //  Import FormsModule here
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+    selector: 'app-todo', //  Ensure it's a standalone component
+    standalone: true,
+    imports: [FormsModule,
+        CommonModule,
+        TodoBoardComponent,
+        MatCheckboxModule,
+        MatCardModule,
+        MatTableModule,
+        MatRadioModule,
+        MatIconModule], //  Import FormsModule here
+    templateUrl: './todo.component.html',
+    styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent{
   
@@ -35,14 +35,12 @@ export class TodoComponent{
 
 
   constructor(private todoService: TodoService) {
-    this.todos$ = this.todoService.todos$;
+   this.todos$ = this.todoService.todos$;
     this.todoService.todos$.subscribe(todos => {
       this.dataSource.data = todos || []; // Ensure it's always an array
     });
   }
-   ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
 
   // Flag to switch between views
   isListView = false;

@@ -14,11 +14,11 @@ import { BrowserModule } from '@angular/platform-browser';
 // export class TaskModalModule { }
 
 @Component({
-  selector: 'app-task-modal',
-  standalone: true,
-  imports: [FormsModule], // ✅ Add FormsModule here
-  templateUrl: './task-modal.component.html',
-  styleUrls: ['./task-modal.component.scss'],
+    selector: 'app-task-modal',
+    standalone: true,
+    imports: [FormsModule], // ✅ Add FormsModule here
+    templateUrl: './task-modal.component.html',
+    styleUrls: ['./task-modal.component.scss']
 })
 export class TaskModalComponent {
   taskName = '';

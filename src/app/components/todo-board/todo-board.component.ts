@@ -16,8 +16,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-todo-board',
+  standalone: true,
   templateUrl: './todo-board.component.html',
-  imports: [TaskModalComponent,NgFor,NgClass,NgIf, AsyncPipe,MatFormFieldModule, MatSelectModule,MatDatepickerModule, MatNativeDateModule, MatInputModule, FormsModule],
+  imports: [TaskModalComponent,NgFor,NgIf, AsyncPipe,MatFormFieldModule, MatSelectModule,MatDatepickerModule, MatNativeDateModule, MatInputModule, FormsModule],
   styleUrls: ['./todo-board.component.scss']
 })
 // @Component({
