@@ -9,4 +9,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'todo-app';
+  constructor() {
+    console.log('AppComponent initialized');
+  }
+  
 }

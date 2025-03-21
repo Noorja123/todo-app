@@ -1,0 +1,79 @@
+<!-- <p>todo-board works!</p> -->
+<h1>Task Board</h1>
+<div class="board-container">
+  <div class="column">
+    <h3>TO DO</h3>
+    <div class="add-task" (click)="openModal()">+ Add Task</div>
+    <!-- <div *ngFor="let task of todos$ | async">
+      <div  class="task-card"  *ngIf="task.status === 'To Do'" class="task-item todo"> -->
+
+        <div *ngFor="let task of todosTodo()">
+          <div class="task-card task-item todo">
+            <span>{{ task.title }}</span>
+
+        <!-- <span>{{ task.title }}</span> -->
+        <!-- <mat-form-field class="custom-dropdown"> -->
+          <mat-select disableRipple (selectionChange)="onOptionSelected($event, task.id)">
+            <mat-select-trigger>
+              <span class="dots-menu">⋯</span>
+            </mat-select-trigger>
+            <mat-option [value]="'rename'">Rename</mat-option>
+            <mat-option [value]="'add'">Add to</mat-option>
+            <mat-option [value]="'mark'">Mark as</mat-option>
+            <mat-option [value]="'delete'">Delete</mat-option>
+          </mat-select>
+        <!-- </mat-form-field> -->
+  
+        <!-- <mat-form-field appearance="outline"> -->
+          <!-- <mat-label>Due Date</mat-label> -->
+          <input matInput [matDatepicker]="picker" hidden >
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        <!-- </mat-form-field> -->
+
+      
+        <div  (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
+      </div>
+  </div>
+  </div>
+
+  <div class="column">
+    <h3>IN PROGRESS</h3>
+
+    <div class="add-task" (click)="openModal()">+ Add Task</div>
+    <!-- <div *ngFor="let task of todos$ |async">
+      <div  class="task-card" *ngIf="task.status === 'In Progress'" class="task-item in-progress"> -->
+
+        <div *ngFor="let task of todosInProgress()">
+          <div class="task-card task-item in-progress">
+            <span>{{ task.title }}</span>
+        <span>{{ task.title }}</span>
+
+        <div  (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
+
+          <i class="bi bi-disc-fill"></i>
+      </div>
+  
+</div>
+    
+  </div>
+  <div class="column">
+    <h3>COMPLETED</h3>
+    <div class="add-task" (click)="openModal()">+ Add Task</div>
+    <!-- <div *ngFor="let task of todos$ |async" >
+      <div  class="task-card"  *ngIf="task.status === 'Completed'" class="task-item completed">
+
+        <span>{{ task.title }}</span> -->
+        <div *ngFor="let task of todosCompleted()">
+          <div class="task-card task-item completed">
+            <span>{{ task.title }}</span>
+
+        <div  (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-task-modal *ngIf="showModal" (taskAdded)="addTodo()" (closeModal)="closeModal()"></app-task-modal>
+

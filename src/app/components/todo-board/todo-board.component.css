@@ -1,0 +1,108 @@
+.board-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .column {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .column h3 {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .task-card {
+    background: #f9f9f9;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-task {
+    text-align: center;
+    font-size: 14px;
+    color: #007bff;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .add-task:hover {
+    text-decoration: underline;
+  }
+  
+  .disc-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid gray;
+    cursor: pointer;
+  }
+  
+  .status-todo {
+    border-color: gray;
+  }
+  
+  .status-inprogress {
+    border-color: orange;
+  }
+  
+  .status-completed {
+    border-color: green;
+    background-color: green;
+  }
+  
+  .task-item {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    transition: all 0.2s;
+  
+    &:hover {
+      background: #f1f1f1;
+    }
+  
+    .task-disc {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    &.in-progress .task-disc {
+      border-color: blue;
+      background: white;
+    }
+  
+    &.completed .task-disc {
+      border-color: green;
+      background: green;
+    }
+  
+    .task-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }

@@ -1,0 +1,52 @@
+body{
+    height:750px;
+}
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+#theme-toggle-btn {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    transition: all 0.3s ease;
+    #theme-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+#sun-icon, #moon-icon {
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+#moon-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0);
+}
+
+.dark-theme #sun-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0);
+}
+
+.dark-theme #moon-icon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+}

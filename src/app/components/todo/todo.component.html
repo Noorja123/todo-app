@@ -1,0 +1,59 @@
+<!-- <p>todo works!</p> -->
+<div class="todo-container">
+    <div class="icons">
+  <nav class="headnav bg-blue-500"><h1 class="text-3xl font-semibold text-gray-700 text-center mb-6">Todo List</h1></nav>
+  <!-- <div class="flex-stretch"></div> -->
+    
+    <nav class="navbar">
+            <div class="view-toggle-container">
+              <a id="list-btn" (click)="listView()"><mat-icon>list</mat-icon>List View</a>
+              <a id="board-btn" (click)="boardview()"><mat-icon></mat-icon>Board View</a>
+              <a id="calender-btn">Calender</a>
+  
+            </div>
+          </nav><hr>
+  
+     <div *ngIf="!isBoardView" class="default-view">
+      <input [(ngModel)]="newTodo" placeholder="Add new task" />
+      <button (click)="addTodo()">Add</button>
+     
+    
+  
+    <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let todo">
+          <mat-checkbox
+            class="custom-checkbox"
+            [checked]="todo.status === 'Completed'"
+            (change)="toggleTodo(todo.id)"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
+      
+    
+      <!-- Task Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Task </th>
+        <td mat-cell *matCellDef="let todo">{{ todo.title }}</td>
+      </ng-container>
+    
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let todo"><div class="flex space-x-10">
+          <button class="btn-icon" mat-button color="warn" (click)="renameTask(todo.id)"><mat-icon>edit</mat-icon></button>
+          <button class="btn-icon" mat-button color="warn" (click)="deleteTodo(todo.id)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </td>
+      </ng-container>
+    
+      <!-- Header & Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     </table>
+   
+    </div>
+    <!-- </div>  -->
+    <app-todo-board *ngIf="isBoardView"></app-todo-board>
+  

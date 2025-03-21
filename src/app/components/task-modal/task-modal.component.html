@@ -1,0 +1,6 @@
+<!-- <p>task-modal works!</p> -->
+<div class="modal-overlay" (click)="closeModal.emit()"></div>
+<!-- <div class="modal" [ngClass]="selectedTheme"> -->
+  <input [(ngModel)]="taskName" placeholder="Enter task name" />
+  <button (click)="addTask()">Add Task</button>
+<!-- </div> -->
