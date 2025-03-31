@@ -10,5 +10,5 @@
 </div>
 <div mat-dialog-actions class="flex justify-center space-x-5">
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" [disabled]="!data.newTitle?.trim() || data.newTitle.length < 3" (click)="onSave()">Save</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
 </div>
