@@ -1,0 +1,9 @@
+.app-content {
+    opacity: 0;
+    transition: opacity 0.8s ease-in;
+  }
+  
+  .fade-in {
+    opacity: 1;
+  }
+  

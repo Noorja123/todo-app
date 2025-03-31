@@ -1,12 +1,14 @@
-<!-- <p>rename-dialog works!</p> -->
-<h1 mat-dialog-title>Rename</h1>
+
+<h1 mat-dialog-title>Rename Task</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.newTitle" placeholder="New task name">
+  <mat-form-field  class="w-full">
+    <mat-label>New Task Name</mat-label>
+    <input matInput [(ngModel)]="data.newTitle" placeholder="Enter new task name" 
+           aria-label="New task name" autocomplete="off" required>
+    <mat-hint *ngIf="data.newTitle?.length < 1">Task name must be at least 3 characters</mat-hint>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-<div class="flex space-x-10">
+<div mat-dialog-actions class="flex justify-center space-x-5">
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button (click)="onSave()">Save</button>
+  <button mat-raised-button color="primary" [disabled]="!data.newTitle?.trim() || data.newTitle.length < 3" (click)="onSave()">Save</button>
 </div>

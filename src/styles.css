@@ -14,7 +14,7 @@ body {
   .container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
+    gap: 1rem
   }
   
   /* Medium screens (Tablets) */
@@ -39,3 +39,8 @@ body {
   }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-mdc-table {
+  background-color:white !important; 
+}

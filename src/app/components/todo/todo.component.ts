@@ -11,6 +11,10 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { RenameDialogComponent } from '../rename-dialog/rename-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-todo',
@@ -21,8 +25,13 @@ import { RenameDialogComponent } from '../rename-dialog/rename-dialog.component'
     MatCardModule,
     MatTableModule,
     MatRadioModule,
-    MatIconModule],
-  templateUrl: './todo.component.html',
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatToolbarModule,
+  ],
+  templateUrl:'./todo.component.html',
   styleUrl: './todo.component.css'
 })
 
@@ -37,78 +46,14 @@ export class TodoComponent {
 
    // Reactive data source for MatTable
    dataSource = computed(() => new MatTableDataSource<Todo>(this.todos()));
-  
-  // displayedColumns: string[] = ['select', 'title', 'actions'];
-  // dataSource = new MatTableDataSource<Todo>([]);
-  // overlay: any;
 
   newTodo = '';
   displayedColumns: string[] = ['select', 'title', 'actions'];
-
-  // constructor(private todoService: TodoService, private dialog: MatDialog) {
-  //  this.todos$ = this.todoService.todos$;
-  //   this.todoService.todos$.subscribe(todos => {
-  //     this.dataSource.data = todos || []; // Ensure it's always an array
-  //   });
-  // }
-
-  // taskService = inject(TodoService);
-  // tasks = this.taskService.tasks;
-
-  
-  // Flag to switch between views
-  // isListView = false;
-
 
   isListView = false;
   isBoardView = false;
   isModalOpen = false;
   newTaskName = '';
-
-//   toggleView() {
-//     this.isListView = !this.isListView;
-//   }
-// //new
-// isBoardView: boolean = false;
-
-// listView() {
-//   this.isBoardView = false;
-// }
-
-// boardview(){
-//   this.isBoardView = true;
-// }
-//   addTodo(): void {
-//     if (this.newTodo.trim()) {
-//       this.todoService.addTodo(this.newTodo);
-//       this.newTodo = '';
-//     }
-//   }
-
-//   toggleTodo(id: number): void {
-//     this.todoService.toggleTodo(id);
-//   }
-
-//   renameTask(id: number): void {
-//     const dialogRef = this.dialog.open(RenameDialogComponent, {
-//       width: '400px',
-//       data: { newTitle: '' }
-//     });
-
-//     dialogRef.afterClosed().subscribe(result => {
-//       if (result && result.trim()) {
-//         this.todoService.renameTodo(id, result.trim());
-//       }
-//     });
-//   }
-
-//   deleteTodo(id: number): void {
-//     this.todoService.deleteTodo(id);
-//   }
-//   isModalOpen = false;
-//   newTaskName = '';
-
-// }
 
 toggleView() {
   this.isListView = !this.isListView;
@@ -150,4 +95,3 @@ deleteTodo(id: number): void {
   this.todoService.deleteTodo(id);
 }
 }
-

@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output,Input, inject } from '@angular/core';
 import { TodoService } from '../../services/todo.service'; // Import the service
 import { FormsModule } from '@angular/forms'; // Import FormsModule
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-task-modal',
-  imports: [FormsModule],
+  imports: [FormsModule,MatFormFieldModule,MatInputModule],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.css'
 })
@@ -25,8 +26,6 @@ export class TaskModalComponent {
       this.todoService.addTodo(this.taskName); // Call service method
       this.taskName = '';
       this.closeModal.emit(); // Close modal after adding task
-
-      
     }
   }
 }
