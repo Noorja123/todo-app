@@ -1,3 +1,5 @@
+<!-- <div class="p-6 max-w-6xl mx-auto"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <mat-toolbar color="primary" class="header bg-blue-600 p-4 text-white text-center">
   <h1 class="title text-2xl font-bold">Todo List</h1>
 </mat-toolbar>
@@ -16,6 +18,7 @@
   </div>
 
   <div *ngIf="!isBoardView" class="default-view flex flex-col space-y-4">
+    <!-- <div *ngIf="!isCalendarView" class="default-view flex flex-col space-y-4"> -->
     <div class="flex flex-row space-x-4 items-center">
       <mat-form-field appearance="outline" class="w-1/4">
         <mat-label>Add new task</mat-label>

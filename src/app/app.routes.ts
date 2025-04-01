@@ -3,6 +3,7 @@ import { TodoComponent } from './components/todo/todo.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/loading/loading.component';
 
+
 export const routes: Routes = [
     {
         path: '',
@@ -23,9 +24,4 @@ export const routes: Routes = [
         path:'app-todo',
         component:TodoComponent,
     },
-    // {
-    //     path:'',
-    //     component:Component
-
-    // },
 ];

@@ -29,15 +29,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule,
-  ],
+    MatToolbarModule,],
   templateUrl:'./todo.component.html',
   styleUrl: './todo.component.css'
 })
 
 export class TodoComponent {
-  // todos$;
-  // newTodo = '';
 
   todoService = inject(TodoService);
   dialog = inject(MatDialog);
@@ -52,8 +49,10 @@ export class TodoComponent {
 
   isListView = false;
   isBoardView = false;
+  isCalendarView = false;
   isModalOpen = false;
   newTaskName = '';
+  currentView: 'list' | 'board' | 'calendar' = 'list'; // Initialize currentView
 
 toggleView() {
   this.isListView = !this.isListView;
@@ -61,12 +60,32 @@ toggleView() {
 
 listView() {
   this.isBoardView = false;
+  this.isCalendarView=false;
+  this.isListView = true;
 }
 
 boardview() {
   this.isBoardView = true;
+  this.isCalendarView=false;
+  this.isListView = false;
 }
 
+calendarview() {
+  this.isCalendarView = true;
+  this.isBoardView = false;
+  this.isListView = false;
+}
+switchToListView() {
+  this.currentView = 'list';
+}
+
+switchToBoardView() {
+  this.currentView = 'board';
+}
+
+switchToCalendarView() {
+  this.currentView = 'calendar';
+}
 addTodo(): void {
   if (this.newTodo.trim()) {
     this.todoService.addTodo(this.newTodo.trim());

@@ -1,108 +1,231 @@
+/* Board layout */
 .board-container {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .column {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    padding: 10px;
-    display: flex;
+  display: flex;
+  gap: 10px;
+}
+
+.column {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column h3 {
+  margin: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+}
+
+.task-card {
+  background: #f9f9f9;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Task item styling */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  transition: all 0.2s;
+}
+
+.task-item:hover {
+  background: #f1f1f1;
+}
+
+.task-item span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px;
+}
+
+.task-item.todo {
+  border-left: 4px solid #3b82f6;
+}
+
+.task-item.in-progress {
+  border-left: 4px solid #f59e0b;
+}
+
+.task-item.completed {
+  border-left: 4px solid #10b981;
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+/* Task action items alignment */
+.task-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 80px; /* Reserve space for dropdown and checkbox */
+}
+
+.task-disc {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  cursor: pointer;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.completed .task-disc {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+.in-progress .task-disc {
+  border-color: #f59e0b;
+}
+
+/* Dropdown menu styling */
+.dots-menu {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+/* Material angular select fixes */
+mat-select {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Form styles */
+.p-6 {
+  padding: 1.5rem;
+}
+
+.max-w-5xl {
+  max-width: 64rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.space-x-4 > * + * {
+  margin-left: 1rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.bg-blue-500 {
+  background-color: #3b82f6;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: #2563eb;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .board-container {
     flex-direction: column;
   }
   
-  .column h3 {
-    margin: 0;
-    padding: 10px 0;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #333;
-    border-bottom: 2px solid #ddd;
+  .column {
+    width: 100%;
+    margin-bottom: 15px;
   }
   
-  .task-card {
-    background: #f9f9f9;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  .flex-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
   }
   
-  .add-task {
-    text-align: center;
-    font-size: 14px;
-    color: #007bff;
-    margin: 10px 0;
-    cursor: pointer;
+  .space-x-4 > * + * {
+    margin-left: 0;
+    margin-top: 0.5rem;
   }
   
-  .add-task:hover {
-    text-decoration: underline;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+  .p-6 {
+    padding: 1rem;
   }
   
-  .disc-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid gray;
-    cursor: pointer;
-  }
-  
-  .status-todo {
-    border-color: gray;
-  }
-  
-  .status-inprogress {
-    border-color: orange;
-  }
-  
-  .status-completed {
-    border-color: green;
-    background-color: green;
+  .column {
+    padding: 8px;
+    min-width: unset;
   }
   
   .task-item {
-    display: flex;
-    align-items: center;
-    justify-content:space-between;
-    gap: 10px;
-    padding: 10px;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 5px;
-    transition: all 0.2s;
-  
-    &:hover {
-      background: #f1f1f1;
-    }
-  
-    .task-disc {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid #ccc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    &.in-progress .task-disc {
-      border-color: blue;
-      background: white;
-    }
-  
-    &.completed .task-disc {
-      border-color: green;
-      background: green;
-    }
-  
-    .task-title {
-      font-size: 14px;
-      font-weight: bold;
-    }
+    padding: 6px;
   }
+}

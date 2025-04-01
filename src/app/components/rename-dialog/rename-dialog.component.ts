@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-rename-dialog',
   imports: [MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './rename-dialog.component.html',
   styleUrl: './rename-dialog.component.css'

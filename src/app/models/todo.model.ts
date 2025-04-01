@@ -14,4 +14,5 @@ export enum TaskStatus {
     title: string;
     completed: boolean;
     status: TaskStatus;
+    dueDate?: Date;
   }
