@@ -17,12 +17,21 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
-  .modal.light-theme {
-    background-color: white;
-    color: black;
+  input {
+    padding: 8px;
+    margin-bottom: 16px;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
   }
   
-  .modal.dark-theme {
-    background-color: black;
+  button {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
     color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }

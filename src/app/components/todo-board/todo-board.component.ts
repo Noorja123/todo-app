@@ -13,6 +13,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RenameDialogComponent } from '../rename-dialog/rename-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-todo-board',
@@ -37,6 +38,10 @@ export class TodoBoardComponent {
 
   // Use signals instead of observables
   todos = this.todoService.tasks;
+
+  themeService = inject(ThemeService);
+  currentTheme = this.themeService.theme;
+
 
   newTodo = '';
   showModal = false;

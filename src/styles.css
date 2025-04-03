@@ -3,44 +3,111 @@
 /* styles.scss */
 
 /* Base Styles - Mobile First */
-body {
-    font-family: Arial, sans-serif;
-    margin: 20;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Default Grid Layout */
-  .container {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1rem
-  }
-  
-  /* Medium screens (Tablets) */
-  @media (min-width: 600px) {
-    .container {
-      grid-template-columns: repeat(2, 1fr); /* 2-column layout for tablets */
-    }
-  }
-  
-  /* Large screens (Desktops) */
-  @media (min-width: 1024px) {
-    .container {
-      grid-template-columns: repeat(3, 1fr); /* 3-column layout for desktops */
-    }
-  }
-  
-  /* Very large screens (Larger Desktops) */
-  @media (min-width: 1440px) {
-    .container {
-      grid-template-columns: repeat(4, 1fr); /* 4-column layout for large screens */
-    }
-  }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* src/styles.scss */
 
+/* Base theme variables */
+:root {
+  --primary-color: #3f51b5;
+  --accent-color: #ff4081;
+  --warn-color: #f44336;
+}
+
+/* Light theme */
+body.light-theme {
+  --bg-color: #f5f5f5;
+  --text-color: #333333;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --hover-bg: #eeeeee;
+  --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme */
+body.dark-theme {
+  --bg-color: #303030;
+  --text-color: #ffffff;
+  --card-bg: #424242;
+  --border-color: #616161;
+  --hover-bg: #505050;
+  --shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Apply theme variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-app-background {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.card, .column, .task-card, .task-item, .todo-container, .modal {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* input, button, select {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+} */
 
 .mat-mdc-table {
-  background-color:white !important; 
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.mat-mdc-header-cell, .mat-mdc-cell {
+  color: var(--text-color);
+}
+
+.mat-mdc-checkbox-frame {
+  border-color: var(--text-color);
+}
+
+/* Material Design styles */
+.mat-mdc-raised-button.mat-primary {
+  background-color: var(--primary-color);
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background-color: var(--accent-color);
+}
+
+/* Make sure Angular Material components respect the theme */
+.mat-mdc-card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.mat-toolbar {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.mat-mdc-menu-panel {
+  background-color: var(--card-bg);
+}
+
+.mat-mdc-menu-item {
+  color: var(--text-color);
+}
+
+.mat-mdc-menu-item:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Make sure the app container uses the theme */
+.app-container {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
 }

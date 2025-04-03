@@ -3,6 +3,7 @@ import { TodoService } from '../../services/todo.service'; // Import the service
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -18,8 +19,9 @@ export class TaskModalComponent {
   @Input() selectedTheme: string = 'light-theme';
   @Output() closeModal = new EventEmitter<void>();
 
-  // constructor(private todoService: TodoService) {}
   
+  themeService = inject(ThemeService);
+  currentTheme = this.themeService.theme;
 
   addTask() {
     if (this.taskName.trim()) {

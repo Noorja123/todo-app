@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-todo',
@@ -40,6 +41,11 @@ export class TodoComponent {
   dialog = inject(MatDialog);
   
   todos = this.todoService.tasks; // Directly using the signal
+  
+  themeService = inject(ThemeService);
+  currentTheme = this.themeService.theme;
+
+
 
    // Reactive data source for MatTable
    dataSource = computed(() => new MatTableDataSource<Todo>(this.todos()));
