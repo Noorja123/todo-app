@@ -4,6 +4,7 @@ import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { TodoService } from './services/todo.service';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { ThemeService } from './services/theme.service';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,16 @@ import { ThemeService } from './services/theme.service';
   templateUrl:'./app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'todo-app';
-  constructor(private themeService: ThemeService) {}
-}
+// export class AppComponent {
+//   title = 'todo-app';
+//   constructor(private themeService: ThemeService) {
+//   }
+// }
+export class AppComponent implements OnInit {
+  private themeService = inject(ThemeService);
+  currentTheme = this.themeService.theme;
   
+  ngOnInit(): void {
+    // Theme is already initialized in the service
+  }
+}

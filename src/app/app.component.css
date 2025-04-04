@@ -1,9 +1,6 @@
-.app-content {
-    opacity: 0;
-    transition: opacity 0.8s ease-in;
-  }
-  
-  .fade-in {
-    opacity: 1;
-  }
-  
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

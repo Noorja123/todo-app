@@ -1,19 +1,18 @@
-<!-- <p>theme-toggle works!</p> -->
 <button 
-mat-icon-button
-class="theme-toggle-btn"
-[matMenuTriggerFor]="themeMenu"
-aria-label="Toggle theme">
-<mat-icon>{{ currentTheme() === 'light-theme' ? 'light_mode' : 'dark_mode' }}</mat-icon>
-</button>
+      mat-icon-button
+      class="theme-toggle-btn"
+      [matMenuTriggerFor]="themeMenu"
+      aria-label="Toggle theme">
+      <mat-icon>{{ currentTheme() === 'light-theme' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
 
-<mat-menu #themeMenu="matMenu">
-<button mat-menu-item (click)="setTheme('light-theme')">
-  <mat-icon>light_mode</mat-icon>
-  <span>Light Theme</span>
-</button>
-<button mat-menu-item (click)="setTheme('dark-theme')">
-  <mat-icon>dark_mode</mat-icon>
-  <span>Dark Theme</span>
-</button>
-</mat-menu>
+    <mat-menu #themeMenu="matMenu">
+      <button mat-menu-item (click)="setTheme('light-theme')">
+        <mat-icon>light_mode</mat-icon>
+        <span>Light Theme</span>
+      </button>
+      <button mat-menu-item (click)="setTheme('dark-theme')">
+        <mat-icon>dark_mode</mat-icon>
+        <span>Dark Theme</span>
+      </button>
+    </mat-menu>

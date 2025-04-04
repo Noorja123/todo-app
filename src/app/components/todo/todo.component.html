@@ -60,4 +60,8 @@
     </table>
   </div>
   <app-todo-board *ngIf="isBoardView"></app-todo-board>
+  <app-calendar-view *ngIf="isCalendarView"></app-calendar-view>
+</div>
+
+<div *ngIf="!isBoardView && !isCalendarView" class="default-view flex flex-col space-y-4">
 </div>

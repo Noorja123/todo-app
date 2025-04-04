@@ -2,112 +2,264 @@
 @import "tailwindcss";
 /* styles.scss */
 
-/* Base Styles - Mobile First */
-/* src/styles.scss */
-
-/* Base theme variables */
+/* Main theme variables */
 :root {
+  /* Light theme variables (default) */
   --primary-color: #3f51b5;
-  --accent-color: #ff4081;
-  --warn-color: #f44336;
+  --primary-light: #757de8;
+  --primary-dark: #002984;
+  --secondary-color: #f50057;
+  --secondary-light: #ff5983;
+  --secondary-dark: #bb002f;
+  --text-color: #212121;
+  --text-secondary: #757575;
+  --background-color: #f5f5f5;
+  --card-background: #ffffff;
+  --divider-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --error-color: #f44336;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --info-color: #2196f3;
 }
 
-/* Light theme */
-body.light-theme {
-  --bg-color: #f5f5f5;
-  --text-color: #333333;
-  --card-bg: #ffffff;
-  --border-color: #e0e0e0;
-  --hover-bg: #eeeeee;
-  --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Dark theme variables */
+[data-theme="dark-theme"] {
+  --primary-color: #7986cb;
+  --primary-light: #aab6fe;
+  --primary-dark: #49599a;
+  --secondary-color: #ff4081;
+  --secondary-light: #ff79b0;
+  --secondary-dark: #c60055;
+  --text-color: #f5f5f5;
+  --text-secondary: #bdbdbd;
+  --background-color: #121212;
+  --card-background: #1e1e1e;
+  --divider-color: #424242;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --error-color: #e57373;
+  --success-color: #81c784;
+  --warning-color: #ffb74d;
+  --info-color: #64b5f6;
 }
 
-/* Dark theme */
-body.dark-theme {
-  --bg-color: #303030;
-  --text-color: #ffffff;
-  --card-bg: #424242;
-  --border-color: #616161;
-  --hover-bg: #505050;
-  --shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-/* Apply theme variables */
+/* Apply theme to general elements */
 body {
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.mat-app-background {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+/* Angular Material Theme Overrides */
+.light-theme {
+  .mat-toolbar {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .mat-icon {
+    color: inherit;
+  }
+  
+  .mat-form-field {
+    .mat-input-element {
+      color: var(--text-color);
+    }
+    
+    .mat-form-field-label {
+      color: var(--text-secondary);
+    }
+    
+    .mat-form-field-underline {
+      background-color: var(--divider-color);
+    }
+    
+    &.mat-focused {
+      .mat-form-field-label {
+        color: var(--primary-color);
+      }
+      
+      .mat-form-field-ripple {
+        background-color: var(--primary-color);
+      }
+    }
+  }
+  
+  .mat-raised-button.mat-primary {
+    background-color: var(--primary-color);
+  }
+  
+  .mat-card {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+  }
+  
+  .mat-table {
+    background-color: var(--card-background);
+    
+    .mat-header-cell {
+      color: var(--text-secondary);
+    }
+    
+    .mat-cell {
+      color: var(--text-color);
+    }
+    
+    .mat-row:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+  
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: var(--primary-color);
+  }
 }
 
-.card, .column, .task-card, .task-item, .todo-container, .modal {
-  background-color: var(--card-bg);
-  border-color: var(--border-color);
-  box-shadow: var(--shadow);
-  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+.dark-theme {
+  .mat-toolbar {
+    background-color: var(--primary-dark);
+    color: white;
+  }
+  
+  .mat-form-field {
+    .mat-input-element {
+      color: var(--text-color);
+    }
+    
+    .mat-form-field-label {
+      color: var(--text-secondary);
+    }
+    
+    .mat-form-field-underline {
+      background-color: var(--divider-color);
+    }
+    
+    &.mat-focused {
+      .mat-form-field-label {
+        color: var(--primary-light);
+      }
+      
+      .mat-form-field-ripple {
+        background-color: var(--primary-light);
+      }
+    }
+  }
+  
+  .mat-raised-button.mat-primary {
+    background-color: var(--primary-color);
+  }
+  
+  .mat-card {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+  }
+  
+  .mat-table {
+    background-color: var(--card-background);
+    
+    .mat-header-cell {
+      color: var(--text-secondary);
+    }
+    
+    .mat-cell {
+      color: var(--text-color);
+    }
+    
+    .mat-row:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+    }
+  }
+  
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: var(--primary-light);
+  }
+  
+  /* Override other Angular Material components in dark mode */
+  .mat-select-panel {
+    background-color: var(--card-background);
+    
+    .mat-option {
+      color: var(--text-color);
+      
+      &:hover:not(.mat-option-disabled) {
+        background-color: rgba(255, 255, 255, 0.04);
+      }
+    }
+  }
+  
+  .mat-menu-panel {
+    background-color: var(--card-background);
+  }
+  
+  .mat-dialog-container {
+    background-color: var(--card-background);
+    color: var(--text-color);
+  }
 }
 
-/* input, button, select {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  border-color: var(--border-color);
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-} */
-
-.mat-mdc-table {
-  background-color: var(--card-bg);
-  color: var(--text-color);
+/* Component-specific theming */
+.todo-container {
+  .task-item {
+    background-color: var(--card-background);
+    border: 1px solid var(--divider-color);
+  }
+  
+  .view-toggle-container {
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--divider-color);
+  }
+  
+  .board-container {
+    .column {
+      background-color: var(--card-background);
+      border: 1px solid var(--divider-color);
+    }
+    
+    .task-card {
+      background-color: color-mix(in srgb, var(--card-background) 90%, var(--primary-color) 10%);
+      border-color: var(--divider-color);
+    }
+  }
 }
 
-.mat-mdc-header-cell, .mat-mdc-cell {
-  color: var(--text-color);
-}
+/* Custom Material Design theming */
+/* @mixin custom-theme($theme-class, $primary, $accent, $warn) { */
+  /* .#{$theme-class} {
+    --mat-primary-color: #{$primary};
+    --mat-accent-color: #{$accent};
+    --mat-warn-color: #{$warn}; */
+    
+    .light-theme,
+.dark-theme {
+  .mat-progress-spinner circle {
+    stroke: var(--primary-color);
+  }
 
-.mat-mdc-checkbox-frame {
-  border-color: var(--text-color);
-}
+  .mat-icon-button {
+    color: var(--text-color);
 
-/* Material Design styles */
-.mat-mdc-raised-button.mat-primary {
-  background-color: var(--primary-color);
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.1);
+    }
+  }
 }
+    .mat-progress-spinner circle {
+      stroke: var(--mat-primary-color);
+    }
+    
+    .mat-icon-button {
+      color: var(--text-color);
+      
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.1);
+      }
+    }
+  /* } */
+/* } */
 
-.mat-mdc-raised-button.mat-accent {
-  background-color: var(--accent-color);
-}
-
-/* Make sure Angular Material components respect the theme */
-.mat-mdc-card {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-}
-
-.mat-toolbar {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-}
-
-.mat-mdc-menu-panel {
-  background-color: var(--card-bg);
-}
-
-.mat-mdc-menu-item {
-  color: var(--text-color);
-}
-
-.mat-mdc-menu-item:hover {
-  background-color: var(--hover-bg);
-}
-
-/* Make sure the app container uses the theme */
-.app-container {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  min-height: 100vh;
-}
+/* @include custom-theme('light-theme', var(--primary-color), var(--secondary-color), var(--error-color));
+@include custom-theme('dark-theme', var(--primary-light), var(--secondary-light), var(--error-color)); */

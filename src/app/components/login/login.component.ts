@@ -5,10 +5,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, MatProgressSpinnerModule,CommonModule,MatFormFieldModule,MatInputModule],
+  imports: [FormsModule, MatProgressSpinnerModule,CommonModule,MatFormFieldModule,MatInputModule,MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,9 +21,13 @@ export class LoginComponent {
     username:'',
     password:''
   };
-
-  isLoading = signal(false);
+  
+    hidePassword: boolean = true;// Other properties and methods of the LoginComponent
+  
+    isLoading = signal(false);
   router=inject(Router);
+  themeService = inject(ThemeService);
+  currentTheme = this.themeService.theme;
 
   right: any;
 

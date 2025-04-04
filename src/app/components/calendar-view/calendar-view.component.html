@@ -1,1 +1,64 @@
-<p>Calendar works</p>
+<!-- <p>Calendar works</p> -->
+<div class="calendar-container">
+    <div class="calendar-header">
+      <button mat-icon-button (click)="previousMonth()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <h2>{{ monthName }} {{ currentYear() }}</h2>
+      <button mat-icon-button (click)="nextMonth()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+    
+    <div class="calendar-add-task">
+      <mat-form-field appearance="outline">
+        <mat-label>Add new task</mat-label>
+        <input matInput [(ngModel)]="newTodo" placeholder="New task"/>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="addTodo()">Add</button>
+    </div>
+    
+    <div class="calendar-grid">
+      <div class="weekday-header">
+        <div class="weekday">Sun</div>
+        <div class="weekday">Mon</div>
+        <div class="weekday">Tue</div>
+        <div class="weekday">Wed</div>
+        <div class="weekday">Thu</div>
+        <div class="weekday">Fri</div>
+        <div class="weekday">Sat</div>
+      </div>
+      
+      <div class="calendar-body">
+        <div class="week" *ngFor="let week of weeks()">
+          <div class="day" *ngFor="let day of week" 
+               [class.today]="day.isToday"
+               [class.empty]="!day.date"
+               (click)="day.date && selectDate(day.date)">
+            
+            <div class="date-number" *ngIf="day.date">{{ day.date }}</div>
+            
+            <div class="tasks-container">
+              <div *ngFor="let task of day.tasks.slice(0, 3)" 
+                   class="task-pill" 
+                   [ngClass]="getStatusClass(task.status)">
+                {{ task.title }}
+                <div class="task-actions">
+                  <button mat-icon-button (click)="toggleTaskStatus(task.id); $event.stopPropagation()">
+                    <mat-icon>check</mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="deleteTask(task.id); $event.stopPropagation()">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+              
+              <div *ngIf="day.tasks.length > 3" class="more-tasks">
+                +{{ day.tasks.length - 3 }} more
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
