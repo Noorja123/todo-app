@@ -44,7 +44,10 @@
   color: var(--text-color);
   transition: color 0.3s ease;
 }
-
+.mat-cell,.mat-cell-def{
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
 .mat-header-cell {
   background-color: color-mix(in srgb, var(--card-background) 70%, var(--primary-color) 30%);
   color: var(--text-color);
