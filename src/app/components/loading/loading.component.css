@@ -1,0 +1,8 @@
+.loading-container {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  ::ng-deep .mat-progress-spinner circle {
+    stroke: var(--primary-color);
+  }

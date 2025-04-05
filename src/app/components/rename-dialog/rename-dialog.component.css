@@ -1,0 +1,35 @@
+/* rename-dialog.component.css */
+
+:host {
+  display: block;
+}
+
+/* For MDC-based Angular Material components */
+:host ::ng-deep .mdc-text-field {
+  background-color: var(--card-background);
+}
+
+:host ::ng-deep .mdc-text-field .mdc-floating-label {
+  color: var(--text-secondary);
+}
+
+:host ::ng-deep .mdc-text-field--focused .mdc-floating-label {
+  color: var(--primary-color);
+}
+
+:host ::ng-deep .mdc-text-field .mdc-text-field__input {
+  color: var(--text-color);
+}
+
+:host ::ng-deep .mdc-text-field-helper-text {
+  color: var(--text-secondary);
+}
+
+:host ::ng-deep .mdc-button {
+  color: var(--text-color);
+}
+
+:host ::ng-deep .mdc-button.mat-primary {
+  background-color: var(--primary-color);
+  color: white;
+}

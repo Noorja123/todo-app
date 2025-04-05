@@ -78,7 +78,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  min-width: 80px; /* Reserve space for dropdown and checkbox */
+  min-width: 80%; /* Reserve space for dropdown and checkbox */
 }
 
 .task-disc {

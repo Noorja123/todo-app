@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output,computed, inject } from '@angular/core';
+import { Component, EventEmitter, Output,ViewEncapsulation,computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {TaskStatus, Todo} from '../../models/todo.model';
@@ -27,7 +27,8 @@ import { ThemeService } from '../../services/theme.service';
          FormsModule,
          MatDialogModule,MatIconModule],
   templateUrl: './todo-board.component.html',
-  styleUrl: './todo-board.component.css'
+  styleUrl: './todo-board.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class TodoBoardComponent {
   @Output() addTask = new EventEmitter<void>(); // Add this line
@@ -72,8 +73,9 @@ onOptionSelected(event: any, id: number): void {
 
 renameTask(id: number): void {
   const dialogRef = this.dialog.open(RenameDialogComponent, {
-    width: '250px',
+    width: '400px',
     data: { newTitle: '' },
+    panelClass: this.currentTheme() === 'dark-theme' ? 'dark-theme-dialog' : 'light-theme-dialog'
   });
 
   dialogRef.afterClosed().subscribe((result) => {

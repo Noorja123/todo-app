@@ -1,5 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2, inject, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal, effect } from '@angular/core';
 
 export type Theme = 'light-theme' | 'dark-theme';
 
@@ -7,64 +6,48 @@ export type Theme = 'light-theme' | 'dark-theme';
   providedIn: 'root'
 })
 export class ThemeService {
-  private renderer: Renderer2;
-  private readonly THEME_KEY = 'app-theme';
+  // Use signal for reactive theme state
+  theme = signal<Theme>('light-theme');
   
-  // Use signal for reactive updates
-  private _theme = signal<Theme>('light-theme');
-  
-  // Public readonly computed signal for components to subscribe to
-  public theme = this._theme.asReadonly();
-  
-  constructor(rendererFactory: RendererFactory2) {
-    this.renderer = rendererFactory.createRenderer(null, null);
-    this.initializeTheme();
+  constructor() {
+    // Initialize theme from localStorage (if available)
+    this.initTheme();
+    
+    // Set up an effect to apply theme changes
+    effect(() => {
+      this.applyTheme(this.theme());
+    });
   }
-  
-  private initializeTheme(): void {
-    // Get saved theme from localStorage or use default
-    const savedTheme = localStorage.getItem(this.THEME_KEY) as Theme;
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Use saved theme or system preference
-    const initialTheme = savedTheme || (prefersDarkMode ? 'dark-theme' : 'light-theme');
-    this.setTheme(initialTheme, false);
-    
-    // Apply theme to document immediately
-    this.applyThemeToDocument(initialTheme);
-  }
-  
-  public setTheme(theme: Theme, savePreference = true): void {
-    // Update signal value
-    this._theme.set(theme);
-    
-    // Apply theme to document
-    this.applyThemeToDocument(theme);
-    
-    // Save preference if requested
-    if (savePreference) {
-      localStorage.setItem(this.THEME_KEY, theme);
+
+  private initTheme(): void {
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    if (savedTheme && (savedTheme === 'light-theme' || savedTheme === 'dark-theme')) {
+      this.theme.set(savedTheme);
+    } else {
+      // Check user's system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.theme.set(prefersDark ? 'dark-theme' : 'light-theme');
     }
   }
-  
-  private applyThemeToDocument(theme: Theme): void {
-    // Remove any existing theme classes
-    document.body.classList.remove('light-theme', 'dark-theme');
-    
-    // Add new theme class
-    document.body.classList.add(theme);
-    
-    // Set data attribute for CSS selectors
-    document.documentElement.setAttribute('data-theme', theme);
-  }
-  
-  public toggleTheme(): void {
+
+  toggleTheme(): void {
     const newTheme = this.theme() === 'light-theme' ? 'dark-theme' : 'light-theme';
     this.setTheme(newTheme);
   }
-  
-  // Helper method to check if current theme is dark
-  public isDarkTheme(): boolean {
-    return this.theme() === 'dark-theme';
+
+  setTheme(theme: Theme): void {
+    this.theme.set(theme);
+    localStorage.setItem('theme', theme);
+  }
+
+  private applyTheme(theme: Theme): void {
+    // Remove any existing theme classes
+    document.body.classList.remove('light-theme', 'dark-theme');
+    
+    // Add the current theme class to the body
+    document.body.classList.add(theme);
+    
+    // Set data-theme attribute for components that use attribute selectors
+    document.documentElement.setAttribute('data-theme', theme);
   }
 }

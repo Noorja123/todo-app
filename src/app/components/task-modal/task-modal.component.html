@@ -1,6 +1,27 @@
-<!-- <p>task-modal works!</p> -->
 <div class="modal-overlay" (click)="closeModal.emit()"></div>
-<!-- <div class="modal" [ngClass]="selectedTheme"> -->
-  <input [(ngModel)]="taskName" placeholder="Enter task name" />
-  <button (click)="addTask()">Add Task</button>
-<!-- </div> -->
+<div class="modal-container">
+  <div class="modal-content">
+    <h2>Add New Task</h2>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Task Name</mat-label>
+      <input 
+        matInput 
+        [(ngModel)]="taskName" 
+        placeholder="Enter task name" 
+        (keyup.enter)="addTask()" 
+        autocomplete="off"
+      />
+    </mat-form-field>
+    <div class="modal-actions">
+      <button mat-button (click)="closeModal.emit()">Cancel</button>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="!taskName.trim()" 
+        (click)="addTask()"
+      >
+        Add Task
+      </button>
+    </div>
+  </div>
+</div>

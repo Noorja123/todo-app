@@ -1,11 +1,10 @@
-
 <h1 mat-dialog-title>Rename Task</h1>
 <div mat-dialog-content>
-  <mat-form-field  class="w-full">
+  <mat-form-field class="w-full">
     <mat-label>New Task Name</mat-label>
     <input matInput [(ngModel)]="data.newTitle" placeholder="Enter new task name" 
            aria-label="New task name" autocomplete="off" required>
-    <mat-hint *ngIf="data.newTitle?.length < 1">Task name must be at least 3 characters</mat-hint>
+    <mat-hint *ngIf="(data.newTitle ?? '').length < 1"></mat-hint>
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="flex justify-center space-x-5">

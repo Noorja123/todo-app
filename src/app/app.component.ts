@@ -1,4 +1,4 @@
-import { Component,computed,signal,inject } from '@angular/core';
+import { Component,computed,signal,inject, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { TodoService } from './services/todo.service';
@@ -10,7 +10,8 @@ import { OnInit } from '@angular/core';
   selector: 'app-root',
   imports: [RouterOutlet,ThemeToggleComponent],
   templateUrl:'./app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 // export class AppComponent {
 //   title = 'todo-app';

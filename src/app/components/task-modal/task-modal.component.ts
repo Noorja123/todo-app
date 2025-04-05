@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ThemeService } from '../../services/theme.service';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-modal',
-  imports: [FormsModule,MatFormFieldModule,MatInputModule],
+  imports: [FormsModule,MatFormFieldModule,MatInputModule,MatButtonModule],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.css'
 })
