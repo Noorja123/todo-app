@@ -20,7 +20,7 @@
     <div class="flex flex-row space-x-4 items-center">
       <mat-form-field appearance="outline" class="w-1/4">
         <mat-label>Add new task</mat-label>
-        <input matInput [(ngModel)]="newTodo" class="p-2 border rounded-md w-full"/>
+        <input matInput [(ngModel)]="newTodo" placeholder="" class="p-2 w-full"/>
       </mat-form-field>
       <button mat-raised-button color="primary" class="text-white py-2 px-6 rounded-lg" (click)="addTodo()">Add</button>
     </div>
