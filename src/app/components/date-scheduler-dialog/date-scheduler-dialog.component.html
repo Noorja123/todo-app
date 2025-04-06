@@ -1,0 +1,17 @@
+<!-- <p>date-scheduler-dialog works!</p> -->
+<h2 mat-dialog-title>Schedule Task</h2>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Due Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="flex justify-between">
+  <button mat-button (click)="clearDate()">Clear Date</button>
+  <div>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </div>
+</div>

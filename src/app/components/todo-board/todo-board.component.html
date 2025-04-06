@@ -1,79 +1,104 @@
-<!-- <div class="p-6 max-w-5xl mx-auto"> -->
-  <div class="flex flex-row space-x-4 items-center">
-    <mat-form-field appearance="outline" class="w-1/4">
-      <mat-label>Add new task</mat-label>
-      <input matInput [(ngModel)]="newTodo" class="p-2 border rounded-md w-full"/>
-    </mat-form-field>
-    <button mat-raised-button color="primary" class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600" (click)="addTodo()">Add</button>
-  </div>
+<div class="flex flex-row space-x-4 items-center">
+  <mat-form-field appearance="outline" class="w-1/4">
+    <mat-label>Add new task</mat-label>
+    <input matInput [(ngModel)]="newTodo" class="p-2 border rounded-md w-full"/>
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600" (click)="addTodo()">Add</button>
+</div>
 
-  <div class="board-container">
-    <div class="column">
-      <h3>TO DO</h3>
-      <div *ngFor="let task of todosTodo()">
-        <div class="task-card task-item todo">
-          <span>{{ task.title }}</span>
-          <div class="task-actions">
-            <mat-select disableRipple (selectionChange)="onOptionSelected($event, task.id)">
-              <mat-select-trigger>
-                <span class="dots-menu">⋯</span>
-              </mat-select-trigger>
-              <mat-option [value]="'rename'">Rename</mat-option>
-              <mat-option [value]="'add'">Add to</mat-option>
-              <mat-option [value]="'mark'">Mark as</mat-option>
-              <mat-option [value]="'delete'">Delete</mat-option>
-            </mat-select>
-            
-            <input matInput [matDatepicker]="picker" hidden>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            
-            <div (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
-          </div>
+<div class="board-container">
+  <div class="column">
+    <h3>TO DO</h3>
+    <div *ngFor="let task of todosTodo()">
+      <div class="task-card task-item todo">
+        <span>{{ task.title }}</span>
+        <div *ngIf="task.dueDate" class="task-due-date">
+          <!-- <mat-icon class="text-sm">event</mat-icon> -->
+          <span class="text-xs">{{ task.dueDate | date:'MMM d' }}</span>
         </div>
-      </div>
-    </div>
-    
-    <div class="column">
-      <h3>IN PROGRESS</h3>
-      <div *ngFor="let task of todosInProgress()">
-        <div class="task-card task-item in-progress">
-          <span>{{ task.title }}</span>
-          <div class="task-actions">
-            <mat-select disableRipple (selectionChange)="onOptionSelected($event, task.id)">
-              <mat-select-trigger>
-                <span class="dots-menu">⋯</span>
-              </mat-select-trigger>
-              <mat-option [value]="'rename'">Rename</mat-option>
-              <mat-option [value]="'add'">Add to</mat-option>
-              <mat-option [value]="'mark'">Mark as</mat-option>
-              <mat-option [value]="'delete'">Delete</mat-option>
-            </mat-select>
-            <div (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="column">
-      <h3>COMPLETED</h3>
-      <div *ngFor="let task of todosCompleted()">
-        <div class="task-card task-item completed">
-          <span>{{ task.title }}</span>
-          <div class="task-actions">
-            <mat-select disableRipple (selectionChange)="onOptionSelected($event, task.id)">
-              <mat-select-trigger>
-                <span class="dots-menu">⋯</span>
-              </mat-select-trigger>
-              <mat-option [value]="'rename'">Rename</mat-option>
-              <mat-option [value]="'add'">Add to</mat-option>
-              <mat-option [value]="'mark'">Mark as</mat-option>
-              <mat-option [value]="'delete'">Delete</mat-option>
-            </mat-select>
-            <div (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
-          </div>
+        <div class="task-actions">
+          <mat-select disableRipple (selectionChange)="onOptionSelected($event, task.id)">
+            <mat-select-trigger>
+              <span class="dots-menu">⋯</span>
+            </mat-select-trigger>
+            <mat-option [value]="'rename'">Rename</mat-option>
+            <mat-option [value]="'schedule'">schedule</mat-option>
+            <mat-option [value]="'mark'">Mark as</mat-option>
+            <mat-option [value]="'delete'">Delete</mat-option>
+          </mat-select>
+          
+          <button mat-icon-button (click)="openDatePicker(task.id)">
+            <mat-icon>event</mat-icon>
+          </button>
+          
+          <div (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
         </div>
       </div>
     </div>
   </div>
-<!-- </div> -->
+  
+  <div class="column">
+    <h3>IN PROGRESS</h3>
+    <div *ngFor="let task of todosInProgress()">
+      <div class="task-card task-item in-progress">
+        <span>{{ task.title }}</span>
+        <div *ngIf="task.dueDate" class="task-due-date">
+          <!-- <mat-icon class="text-sm">event</mat-icon> -->
+          <span class="text-xs">{{ task.dueDate | date:'MMM d' }}</span>
+        </div>
+        <div class="task-actions">
+          <mat-select disableRipple (selectionChange)="onOptionSelected($event, task.id)">
+            <mat-select-trigger>
+              <span class="dots-menu">⋯</span>
+            </mat-select-trigger>
+            <mat-option [value]="'rename'">Rename</mat-option>
+            <mat-option [value]="'schedule'">schedule</mat-option>
+            <mat-option [value]="'mark'">Mark as</mat-option>
+            <mat-option [value]="'delete'">Delete</mat-option>
+          </mat-select>
+          
+          <button mat-icon-button (click)="openDatePicker(task.id)">
+            <mat-icon>event</mat-icon>
+          </button>
+          
+          <div (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column">
+    <h3>COMPLETED</h3>
+    <div *ngFor="let task of todosCompleted()">
+      <div class="task-card task-item completed">
+        <span>{{ task.title }}</span>
+        <div *ngIf="task.dueDate" class="task-due-date">
+          <!-- <mat-icon class="text-sm">event</mat-icon> -->
+          <span class="text-xs">{{ task.dueDate | date:'MMM d' }}</span>
+        </div>
+        <div class="task-actions">
+          <mat-select disableRipple (selectionChange)="onOptionSelected($event, task.id)">
+            <mat-select-trigger>
+              <span class="dots-menu">⋯</span>
+            </mat-select-trigger>
+            <mat-option [value]="'rename'">Rename</mat-option>
+            <mat-option [value]="'schedule'">schedule</mat-option>
+            <mat-option [value]="'mark'">Mark as</mat-option>
+            <mat-option [value]="'delete'">Delete</mat-option>
+          </mat-select>
+          
+          <button mat-icon-button (click)="openDatePicker(task.id)">
+            <mat-icon>event</mat-icon>
+          </button>
+          
+          <div (click)="toggleTaskStatus(task.id)" class="task-disc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Date picker dialog -->
+<ng-template>
+  <mat-datepicker #datepicker (closed)="onDatePickerClosed()"></mat-datepicker>
+</ng-template>

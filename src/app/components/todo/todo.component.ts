@@ -16,8 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ThemeService } from '../../services/theme.service';
 import { CalendarViewComponent } from '../calendar-view/calendar-view.component';
+import { DateSchedulerDialogComponent } from '../date-scheduler-dialog/date-scheduler-dialog.component';
 
 @Component({
   selector: 'app-todo',
@@ -36,6 +38,7 @@ import { CalendarViewComponent } from '../calendar-view/calendar-view.component'
     MatListModule,
     MatToolbarModule,
     MatButtonModule,
+    MatTooltipModule,
     CalendarViewComponent
   ],
   templateUrl: './todo.component.html',
@@ -52,22 +55,11 @@ export class TodoComponent {
   dataSource = computed(() => new MatTableDataSource<Todo>(this.todos()));
 
   newTodo = '';
-  displayedColumns: string[] = ['select', 'title', 'actions'];
+  displayedColumns: string[] = ['select', 'title', 'dueDate', 'actions'];
 
   isListView = true;
   isBoardView = false;
   isCalendarView = false;
-  
-  // Track which row is being hovered
-  hoveredRowId: number | null = null;
-
-  setHoveredRow(id: number | null): void {
-    this.hoveredRowId = id;
-  }
-
-  isRowHovered(id: number): boolean {
-    return this.hoveredRowId === id;
-  }
 
   toggleTheme(): void {
     const newTheme = this.currentTheme() === 'dark-theme' ? 'light-theme' : 'dark-theme';
@@ -120,7 +112,29 @@ export class TodoComponent {
     });
   }
 
+  scheduleTodo(id: number): void {
+    const todo = this.todos().find(t => t.id === id);
+    if (!todo) return;
+
+    const dialogRef = this.dialog.open(DateSchedulerDialogComponent, {
+      width: '400px',
+      data: { currentDate: todo.dueDate },
+      panelClass: this.currentTheme() === 'dark-theme' ? 'dark-theme-dialog' : 'light-theme-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) { // Only update if the dialog wasn't canceled
+        this.todoService.scheduleTodo(id, result);
+      }
+    });
+  }
+
   deleteTodo(id: number): void {
     this.todoService.deleteTodo(id);
+  }
+
+  isOverdue(date: Date | null): boolean {
+    if (!date) return false;
+    return new Date(date) < new Date() && date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
   }
 }

@@ -12,6 +12,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { RenameDialogComponent } from '../rename-dialog/rename-dialog.component';
+import { DateSchedulerDialogComponent } from '../date-scheduler-dialog/date-scheduler-dialog.component';
 
 @Component({
   selector: 'app-calendar-view',
@@ -108,12 +109,16 @@ export class CalendarViewComponent implements OnInit {
            this.currentYear() === today.getFullYear();
   }
   
-  // Get tasks for a specific date (simplified - in a real app you'd filter by actual task dates)
+  // Get tasks for a specific date
   getTasksForDate(date: Date): Todo[] {
-    // For demo purposes, distribute tasks across the calendar
-    // In a real app, you'd filter by the actual due date property
-    const dayOfMonth = date.getDate();
-    return this.todos().filter(todo => todo.id % 31 === dayOfMonth);
+    return this.todos().filter(todo => {
+      if (!todo.dueDate) return false;
+      
+      const todoDate = new Date(todo.dueDate);
+      return todoDate.getDate() === date.getDate() && 
+             todoDate.getMonth() === date.getMonth() && 
+             todoDate.getFullYear() === date.getFullYear();
+    });
   }
   
   // Navigation methods
@@ -133,14 +138,40 @@ export class CalendarViewComponent implements OnInit {
   selectDate(date: number) {
     if (date) {
       this.selectedDate.set(new Date(this.currentYear(), this.currentMonth(), date));
+      this.openAddTaskDialog();
     } else {
       this.selectedDate.set(null);
     }
   }
   
+  openAddTaskDialog(): void {
+    if (!this.selectedDate()) return;
+    
+    // Open dialog for adding task on selected date
+    const dialogRef = this.dialog.open(DateSchedulerDialogComponent, {
+      width: '400px',
+      data: { currentDate: this.selectedDate() }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined && this.newTodo.trim()) {
+        // Add task with selected date
+        this.todoService.addTodo(this.newTodo);
+        const newTaskId = this.todos()[this.todos().length - 1].id;
+        this.todoService.scheduleTodo(newTaskId, result);
+        this.newTodo = '';
+        this.generateCalendar();
+      }
+    });
+  }
+  
   addTodo(): void {
     if (this.newTodo.trim()) {
       this.todoService.addTodo(this.newTodo);
+      if (this.selectedDate()) {
+        const newTaskId = this.todos()[this.todos().length - 1].id;
+        this.todoService.scheduleTodo(newTaskId, this.selectedDate());
+      }
       this.newTodo = '';
       this.generateCalendar(); // Refresh calendar
     }
@@ -151,15 +182,15 @@ export class CalendarViewComponent implements OnInit {
     this.generateCalendar(); // Refresh calendar
   }
   
-  renameTask(id: number): void {
-    const dialogRef = this.dialog.open(RenameDialogComponent, {
-      width: '250px',
-      data: { newTitle: '' },
+  scheduleTask(id: number): void {
+    const dialogRef = this.dialog.open(DateSchedulerDialogComponent, {
+      width: '300px',
+      data: { currentDate: this.todos().find(t => t.id === id)?.dueDate || null }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result && result.trim()) {
-        this.todoService.renameTodo(id, result.trim());
+      if (result !== undefined) {
+        this.todoService.scheduleTodo(id, result);
         this.generateCalendar(); // Refresh calendar
       }
     });

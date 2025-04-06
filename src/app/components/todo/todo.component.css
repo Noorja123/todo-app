@@ -1,133 +1,116 @@
-/* Todo Component Theme-Aware Styles */
 .todo-container {
-  padding: 1.5rem;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  min-height: calc(100vh - 64px);
-}
-
-.header {
-  background-color: var(--primary-color);
-  color: white;
-  transition: background-color 0.3s ease;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .view-toggle-container {
-  background-color: var(--card-background);
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px var(--shadow-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  color: var(--text-color);
+  background-color: rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease;
 }
 
-.view-toggle-container .mat-list-item {
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
-  color: var(--text-color);
+:host-context(.dark-theme) .view-toggle-container {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-.view-toggle-container .mat-list-item:hover,
-.view-toggle-container .mat-list-item.active {
-  background-color: var(--hover-color);
+.active-view {
+  background-color: rgba(63, 81, 181, 0.1);
   color: var(--primary-color);
+  font-weight: 500;
 }
 
-/* Table styling */
-.mat-elevation-z8 {
-  box-shadow: 0 2px 8px var(--shadow-color);
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: var(--card-background);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-  color: var(--text-color);
+:host-context(.dark-theme) .active-view {
+  background-color: rgba(63, 81, 181, 0.2);
 }
 
-.mat-cell, .mat-header-cell {
-  color: var(--text-color);
-  transition: color 0.3s ease;
-  padding: 16px;
+.completed-task {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.5);
 }
 
-.mat-header-cell {
-  background-color: color-mix(in srgb, var(--card-background) 80%, var(--primary-color) 20%);
-  color: var(--text-color);
-  font-weight: bold;
+:host-context(.dark-theme) .completed-task {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-tr.mat-row {
+.completed-row {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+:host-context(.dark-theme) .completed-row {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.task-row {
   transition: background-color 0.2s ease;
 }
 
-tr.mat-row:hover {
-  background-color: var(--hover-color);
+.task-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
-/* Hide action buttons by default */
-.action-buttons {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0.2s linear;
+:host-context(.dark-theme) .task-row:hover {
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
-/* Show action buttons on row hover */
-tr.mat-row:hover .action-buttons {
-  visibility: visible;
-  opacity: 1;
+.mat-column-select {
+  width: 80px;
 }
 
-/* Alternative approach using display property */
-.hidden-actions {
-  display: none;
+.mat-column-actions {
+  width: 150px;
 }
 
-tr.mat-row:hover .hidden-actions {
-  display: flex;
+.mat-column-dueDate {
+  width: 150px;
 }
 
-/* Form field styling */
-.mat-form-field {
-  width: 100%;
+.overdue {
+  color: #f44336;
+  font-weight: bold;
 }
 
-.mat-form-field-wrapper {
-  padding-bottom: 0;
+/* Preserve existing styles */
+
+/* Add minimal dark theme improvements */
+:host-context(.dark-theme) .mat-table {
+  background-color: #333;
+  color: rgba(255, 255, 255, 0.87);
 }
 
-/* Fix for completed tasks */
+:host-context(.dark-theme) .mat-header-row {
+  background-color: #2c2c2c;
+}
+
+:host-context(.dark-theme) .view-toggle-container {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:host-context(.dark-theme) .mat-form-field-outline {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+:host-context(.dark-theme) .mat-form-field-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:host-context(.dark-theme) .mat-form-field {
+  color: white;
+}
+
+:host-context(.dark-theme) .mat-input-element {
+  color: white;
+}
+
+:host-context(.dark-theme) .mat-row {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Add due date column style */
+.mat-column-dueDate {
+  width: 120px;
+}
+
+/* Subtle style for completed tasks - preserve existing if already defined */
 .completed-task {
-  color: var(--completed-color);
   text-decoration: line-through;
-}
-
-/* Direct element styling */
-button.mat-icon-button {
-  color: var(--text-color);
-}
-
-button.mat-icon-button:hover {
-  background-color: var(--hover-color);
-}
-
-/* Ensure checkboxes are visible in both themes */
-::ng-deep .mat-checkbox-frame {
-  border-color: var(--text-secondary);
-}
-
-::ng-deep .mat-form-field-outline {
-  color: var(--divider-color);
-}
-
-::ng-deep .mat-form-field-outline-thick {
-  color: var(--primary-color);
-}
-
-/* Dark theme specific overrides */
-:host-context(.dark-theme) .mat-header-cell {
-  background-color: color-mix(in srgb, var(--card-background) 80%, var(--primary-dark) 20%);
-}
-
-:host-context(.dark-theme) .view-toggle-container .mat-list-item.active {
-  color: var(--primary-light);
+  opacity: 0.7;
 }
