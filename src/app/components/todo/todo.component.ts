@@ -57,6 +57,22 @@ export class TodoComponent {
   isListView = true;
   isBoardView = false;
   isCalendarView = false;
+  
+  // Track which row is being hovered
+  hoveredRowId: number | null = null;
+
+  setHoveredRow(id: number | null): void {
+    this.hoveredRowId = id;
+  }
+
+  isRowHovered(id: number): boolean {
+    return this.hoveredRowId === id;
+  }
+
+  toggleTheme(): void {
+    const newTheme = this.currentTheme() === 'dark-theme' ? 'light-theme' : 'dark-theme';
+    this.themeService.setTheme(newTheme);
+  }
 
   listView() {
     this.isBoardView = false;
@@ -88,9 +104,12 @@ export class TodoComponent {
   }
 
   renameTask(id: number): void {
+    const todo = this.todos().find(t => t.id === id);
+    if (!todo) return;
+
     const dialogRef = this.dialog.open(RenameDialogComponent, {
       width: '400px',
-      data: { newTitle: '' },
+      data: { newTitle: todo.title },
       panelClass: this.currentTheme() === 'dark-theme' ? 'dark-theme-dialog' : 'light-theme-dialog'
     });
 

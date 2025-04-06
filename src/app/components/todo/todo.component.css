@@ -4,6 +4,7 @@
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: calc(100vh - 64px);
 }
 
 .header {
@@ -13,21 +14,24 @@
 }
 
 .view-toggle-container {
-  background-color: color-mix(in srgb, var(--background-color) 80%, var(--primary-color) 20%);
+  background-color: var(--card-background);
   border-radius: 0.5rem;
+  box-shadow: 0 2px 4px var(--shadow-color);
   transition: background-color 0.3s ease, color 0.3s ease;
   color: var(--text-color);
 }
 
-.view-toggle-container mat-list-item {
-  background-color: var(--card-background);
+.view-toggle-container .mat-list-item {
+  border-radius: 4px;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
   color: var(--text-color);
 }
 
-.view-toggle-container mat-list-item:hover {
-  background-color: color-mix(in srgb, var(--card-background) 90%, var(--primary-color) 10%);
+.view-toggle-container .mat-list-item:hover,
+.view-toggle-container .mat-list-item.active {
+  background-color: var(--hover-color);
+  color: var(--primary-color);
 }
 
 /* Table styling */
@@ -43,35 +47,87 @@
 .mat-cell, .mat-header-cell {
   color: var(--text-color);
   transition: color 0.3s ease;
+  padding: 16px;
 }
-.mat-cell,.mat-cell-def{
-  color: var(--text-color);
-  transition: color 0.3s ease;
-}
+
 .mat-header-cell {
-  background-color: color-mix(in srgb, var(--card-background) 70%, var(--primary-color) 30%);
+  background-color: color-mix(in srgb, var(--card-background) 80%, var(--primary-color) 20%);
   color: var(--text-color);
+  font-weight: bold;
+}
+
+tr.mat-row {
+  transition: background-color 0.2s ease;
 }
 
 tr.mat-row:hover {
   background-color: var(--hover-color);
 }
 
-/* Fix for mat-form-field text color */
-::ng-deep .mat-form-field .mat-input-element {
+/* Hide action buttons by default */
+.action-buttons {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s linear;
+}
+
+/* Show action buttons on row hover */
+tr.mat-row:hover .action-buttons {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Alternative approach using display property */
+.hidden-actions {
+  display: none;
+}
+
+tr.mat-row:hover .hidden-actions {
+  display: flex;
+}
+
+/* Form field styling */
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+/* Fix for completed tasks */
+.completed-task {
+  color: var(--completed-color);
+  text-decoration: line-through;
+}
+
+/* Direct element styling */
+button.mat-icon-button {
   color: var(--text-color);
 }
 
-::ng-deep .mat-form-field-label {
-  color: var(--text-secondary);
-}
-
-/* Ensure icons use the right color */
-::ng-deep .mat-icon {
-  color: var(--text-color);
+button.mat-icon-button:hover {
+  background-color: var(--hover-color);
 }
 
 /* Ensure checkboxes are visible in both themes */
 ::ng-deep .mat-checkbox-frame {
   border-color: var(--text-secondary);
+}
+
+::ng-deep .mat-form-field-outline {
+  color: var(--divider-color);
+}
+
+::ng-deep .mat-form-field-outline-thick {
+  color: var(--primary-color);
+}
+
+/* Dark theme specific overrides */
+:host-context(.dark-theme) .mat-header-cell {
+  background-color: color-mix(in srgb, var(--card-background) 80%, var(--primary-dark) 20%);
+}
+
+:host-context(.dark-theme) .view-toggle-container .mat-list-item.active {
+  color: var(--primary-light);
 }

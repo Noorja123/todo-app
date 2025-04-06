@@ -1,193 +1,197 @@
 .calendar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .calendar-header h2 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 500;
-  }
-  
-  .calendar-add-task {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  
-  .calendar-add-task mat-form-field {
-    flex: 1;
-  }
-  
-  .weekday-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 8px;
-  }
-  
-  .weekday {
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-    color: #666;
-  }
-  
-  .calendar-body {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.calendar-add-task {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.calendar-add-task mat-form-field {
+  flex: 1;
+}
+
+.weekday-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--divider-color);
+  margin-bottom: 8px;
+}
+
+.weekday {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+.calendar-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.day {
+  border: 1px solid var(--divider-color);
+  border-radius: 4px;
+  min-height: 100px;
+  padding: 8px;
+  background: var(--card-background);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.day:hover {
+  background: var(--hover-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.empty {
+  background: color-mix(in srgb, var(--card-background) 95%, var(--text-color) 5%);
+  cursor: default;
+}
+
+.today {
+  border: 2px solid var(--primary-color);
+  background: color-mix(in srgb, var(--card-background) 95%, var(--primary-color) 5%);
+}
+
+.date-number {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: right;
+  color: var(--text-color);
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-pill {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.task-pill:hover .task-actions {
+  display: flex;
+}
+
+.task-actions {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background: inherit;
+  padding-left: 8px;
+}
+
+.task-actions button {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.task-actions mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.more-tasks {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.todo-task {
+  background-color: color-mix(in srgb, var(--info-color) 10%, var(--card-background) 90%);
+  border-left: 3px solid var(--info-color);
+  color: var(--text-color);
+}
+
+.in-progress-task {
+  background-color: color-mix(in srgb, var(--warning-color) 10%, var(--card-background) 90%);
+  border-left: 3px solid var(--warning-color);
+  color: var(--text-color);
+}
+
+.completed-task {
+  background-color: color-mix(in srgb, var(--success-color) 10%, var(--card-background) 90%);
+  border-left: 3px solid var(--success-color);
+  text-decoration: line-through;
+  color: var(--completed-color);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
   .week {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-  }
-  
-  .day {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    min-height: 100px;
-    padding: 8px;
-    background: #fff;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.2s;
-  }
-  
-  .day:hover {
-    background: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .empty {
-    background: #f9f9f9;
-    cursor: default;
-  }
-  
-  .today {
-    border: 2px solid #3b82f6;
-    background: rgba(59, 130, 246, 0.05);
-  }
-  
-  .date-number {
-    font-weight: bold;
-    margin-bottom: 8px;
-    text-align: right;
-  }
-  
-  .tasks-container {
-    display: flex;
-    flex-direction: column;
     gap: 4px;
   }
   
+  .day {
+    min-height: 80px;
+    padding: 4px;
+  }
+  
   .task-pill {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekday {
     font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+    padding: 4px;
   }
   
-  .task-pill:hover .task-actions {
-    display: flex;
-  }
-  
-  .task-actions {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    background: inherit;
-    padding-left: 8px;
-  }
-  
-  .task-actions button {
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-  }
-  
-  .task-actions mat-icon {
-    font-size: 16px;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-  }
-  
-  .more-tasks {
+  .date-number {
     font-size: 12px;
-    color: #666;
-    text-align: center;
-    margin-top: 4px;
   }
   
-  .todo-task {
-    background-color: #e3f2fd;
-    border-left: 3px solid #3b82f6;
+  .day {
+    min-height: 60px;
   }
   
-  .in-progress-task {
-    background-color: #fff8e1;
-    border-left: 3px solid #f59e0b;
+  .task-pill {
+    margin: 1px 0;
   }
-  
-  .completed-task {
-    background-color: #e8f5e9;
-    border-left: 3px solid #10b981;
-    text-decoration: line-through;
-    color: #6b7280;
-  }
-  
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    .week {
-      gap: 4px;
-    }
-    
-    .day {
-      min-height: 80px;
-      padding: 4px;
-    }
-    
-    .task-pill {
-      font-size: 10px;
-      padding: 2px 4px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .weekday {
-      font-size: 12px;
-      padding: 4px;
-    }
-    
-    .date-number {
-      font-size: 12px;
-    }
-    
-    .day {
-      min-height: 60px;
-    }
-    
-    .task-pill {
-      margin: 1px 0;
-    }
-  }
+}

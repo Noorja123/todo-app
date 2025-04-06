@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
-@tailwind utilities;
 
 /* Main theme variables */
 :root {
@@ -266,3 +265,4 @@ button {
   --mdc-dialog-subhead-color: var(--text-color);
   --mdc-dialog-supporting-text-color: var(--text-color);
 }
+
