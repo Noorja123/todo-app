@@ -70,106 +70,138 @@ button {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Angular Material Theme Overrides */
-.mat-toolbar {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.mat-icon {
-  color: inherit;
-}
-
-.mat-form-field .mat-input-element {
-  color: var(--text-color);
-}
-
-.mat-form-field .mat-form-field-label {
-  color: var(--text-secondary);
-}
-
-.mat-form-field .mat-form-field-underline {
-  background-color: var(--divider-color);
-}
-
-.mat-form-field.mat-focused .mat-form-field-label {
-  color: var(--primary-color);
-}
-
-.mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: var(--primary-color);
-}
-
-.mat-raised-button.mat-primary {
-  background-color: var(--primary-color);
-}
-
-.mat-card {
+/* Angular Material MDC Overrides */
+.mat-mdc-card {
   background-color: var(--card-background);
   color: var(--text-color);
   box-shadow: 0 2px 8px var(--shadow-color);
 }
 
-.mat-table {
+.mat-mdc-table {
   background-color: var(--card-background);
 }
 
-.mat-table .mat-header-cell {
+.mat-mdc-header-cell {
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
-.mat-table .mat-cell {
+.mat-mdc-cell {
   color: var(--text-color);
 }
 
-.mat-table .mat-row:hover {
+.mat-mdc-row:hover {
   background-color: var(--hover-color);
 }
 
-.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+/* Form Fields */
+.mat-mdc-form-field .mdc-text-field--outlined .mdc-notched-outline__leading,
+.mat-mdc-form-field .mdc-text-field--outlined .mdc-notched-outline__notch,
+.mat-mdc-form-field .mdc-text-field--outlined .mdc-notched-outline__trailing {
+  border-color: var(--divider-color);
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-focus-overlay {
+  background-color: transparent;
+}
+
+.mat-mdc-form-field.mat-focused .mdc-text-field--outlined .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-focused .mdc-text-field--outlined .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-focused .mdc-text-field--outlined .mdc-notched-outline__trailing {
+  border-color: var(--primary-color);
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-label {
+  color: var(--text-secondary);
+}
+
+.mat-mdc-input-element {
+  color: var(--text-color);
+}
+
+/* Buttons */
+.mat-mdc-raised-button.mat-primary {
   background-color: var(--primary-color);
 }
 
+.mat-mdc-icon-button {
+  color: var(--text-color);
+}
+
+.mat-mdc-icon-button:hover {
+  background-color: var(--hover-color);
+}
+
+/* Checkboxes */
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__background {
+  border-color: var(--text-secondary);
+}
+
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Toolbar */
+.mat-mdc-toolbar.mat-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
 /* Dark theme specific overrides */
-.dark-theme .mat-toolbar {
+.dark-theme .mat-mdc-toolbar.mat-primary {
   background-color: var(--primary-dark);
 }
 
-.dark-theme .mat-form-field.mat-focused .mat-form-field-label,
-.dark-theme .mat-form-field.mat-focused .mat-form-field-ripple {
-  color: var(--primary-light);
-  background-color: var(--primary-light);
+/* Dialog containers */
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--card-background);
+  --mdc-dialog-with-divider-divider-color: var(--divider-color);
+  --mdc-dialog-subhead-color: var(--text-color);
+  --mdc-dialog-supporting-text-color: var(--text-color);
 }
 
-.dark-theme .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background-color: var(--primary-light);
-}
-
-/* Additional component styling for dark theme */
-.dark-theme .mat-select-panel,
-.dark-theme .mat-menu-panel,
-.dark-theme .mat-dialog-container {
+/* Menu panels */
+.mat-mdc-menu-panel {
   background-color: var(--card-background);
+}
+
+.mat-mdc-menu-item {
   color: var(--text-color);
 }
 
-.dark-theme .mat-option {
+.mat-mdc-menu-item:hover:not([disabled]) {
+  background-color: var(--hover-color);
+}
+
+/* Select panels */
+.mat-mdc-select-panel {
+  background-color: var(--card-background);
+}
+
+.mat-mdc-option {
   color: var(--text-color);
 }
 
-.dark-theme .mat-option:hover:not(.mat-option-disabled) {
-  background-color: rgba(255, 255, 255, 0.04);
+.mat-mdc-option:hover:not(.mat-mdc-option-disabled) {
+  background-color: var(--hover-color);
+}
+
+/* Progress Spinner */
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: var(--primary-color);
+}
+
+/* Theme toggle animation */
+.theme-toggle-btn:hover {
+  transform: rotate(30deg);
 }
 
 /* Component-specific theming */
 .todo-container .task-item {
   background-color: var(--card-background);
   border: 1px solid var(--divider-color);
-}
-
-.todo-container .view-toggle-container {
-  background-color: var(--background-color);
-  border-bottom: 1px solid var(--divider-color);
 }
 
 .todo-container .board-container .column {
@@ -182,87 +214,16 @@ button {
   border-color: var(--divider-color);
 }
 
-/* Task list specific styles */
-.completed-task {
-  color: var(--completed-color);
-  text-decoration: line-through;
-}
-
-/* Universal Material component styling */
-.mat-progress-spinner circle {
-  stroke: var(--primary-color);
-}
-
-.mat-icon-button {
-  color: var(--text-color);
-}
-
-.mat-icon-button:hover {
-  background-color: var(--hover-color);
-}
-
-/* Dialog styles */
-.mat-dialog-container {
+/* Calendar specific styles */
+.calendar-container .calendar-day {
   background-color: var(--card-background);
-  color: var(--text-color);
+  border: 1px solid var(--divider-color);
 }
 
-/* Modal styling */
-.modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+.calendar-container .today {
+  border: 2px solid var(--primary-color);
 }
 
-.modal-content {
-  background-color: var(--card-background);
-  color: var(--text-color);
-  box-shadow: 0 4px 8px var(--shadow-color);
+.calendar-container .has-tasks {
+  background-color: color-mix(in srgb, var(--card-background) 90%, var(--primary-color) 10%);
 }
-
-/* Theme toggle animation */
-.theme-toggle-btn:hover {
-  transform: rotate(30deg);
-}
-
-/* Dialog theme classes */
-.dark-theme-dialog .mat-dialog-container {
-  background-color: var(--card-background);
-  color: var(--text-color);
-}
-
-.light-theme-dialog .mat-dialog-container {
-  background-color: var(--card-background);
-  color: var(--text-color);
-}
-
-/* Ensure form fields in dialogs follow theme */
-.mat-dialog-container .mat-form-field-label {
-  color: var(--text-secondary);
-}
-
-.mat-dialog-container .mat-input-element {
-  color: var(--text-color);
-}
-
-::ng-deep .mat-mdc-form-field.appearance-outline .mdc-line-ripple {
-  display: none;
-}
-
-::ng-deep .mat-mdc-form-field.appearance-outline .mdc-notched-outline__idle {
-  border: none !important;
-}
-
-/* These should be in your styles.css or a global theme file */
-.light-theme-dialog .mat-mdc-dialog-container {
-  --mdc-dialog-container-color: var(--card-background);
-  --mdc-dialog-with-divider-divider-color: var(--divider-color);
-  --mdc-dialog-subhead-color: var(--text-color);
-  --mdc-dialog-supporting-text-color: var(--text-color);
-}
-
-.dark-theme-dialog .mat-mdc-dialog-container {
-  --mdc-dialog-container-color: var(--card-background);
-  --mdc-dialog-with-divider-divider-color: var(--divider-color);
-  --mdc-dialog-subhead-color: var(--text-color);
-  --mdc-dialog-supporting-text-color: var(--text-color);
-}
-
